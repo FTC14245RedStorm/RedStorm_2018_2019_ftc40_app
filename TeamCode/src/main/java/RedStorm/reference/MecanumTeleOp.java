@@ -11,7 +11,6 @@ import com.qualcomm.robotcore.util.Range;
  */
 
 @TeleOp
-@Disabled
 
 public class MecanumTeleOp extends OpMode {
 
