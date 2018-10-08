@@ -39,20 +39,28 @@ import RedStorm.Robot.Robot;
           */
             double left = gamepad1.left_stick_y;
             double right = gamepad1.right_stick_y;
+            double lift = gamepad2.right_stick_y;
+           // double liftDown = gamepad1.dpad_down;
+           // double liftUp = gamepad1.dpad_up;
         /* Insure that the values from the gamepad for left and right will
            always be between -1.0 and 1.0.  This is done since motor powers
            can only be between -1.0 (100% reverse) and 1.0 (100% forward)
          */
             left = Range.clip(left, -1, 1);
             right = Range.clip(right, -1, 1);
+            lift = Range.clip(lift,  -1, 1);
+
         /* Smooth the right and left powers.  Smoothing will give the driver better control.
            See the smoothPower method for more information.
          */
             left  = smoothPower(left);
             right = smoothPower(right);
+            lift = smoothPower(lift);
             /* Set the motor power for the robot.
              */
             robot.setDriveMotorPower(left, right);
+
+            robot.setLiftMotorPower(lift);
         }
         /**
          * smoothPower will attempt to smooth or scale joystick input when driving the
