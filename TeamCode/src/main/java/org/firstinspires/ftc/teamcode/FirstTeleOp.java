@@ -11,7 +11,7 @@ import RedStorm.Robot.Robot;
 // commented out.
 //@Disabled
 // This line establishes the name of the op mode and
-// extends the header file "OpMode" in order to create a teleop op mode.
+// extends the header file "OpMode" in order to create a teleop op mode.  just for fun
 
 
     public class FirstTeleOp extends OpMode {
