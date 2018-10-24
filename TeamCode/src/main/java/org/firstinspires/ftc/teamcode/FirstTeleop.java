@@ -39,10 +39,15 @@ public class FirstTeleop extends OpMode{
         /* For this robot, gamepad1 will control the movement of the robot
            the left Y stick, will control the left drive side motors, the right Y
            will control the right drive side motors.
+
+           The values returned by left_stick_y and right_stick_y are negated because:
+           - When the stick is pushed away from the driver, the value returned is negative.
+           - When the stick is pulled towards the driver, the value returned is positive.
+
            First get the value for the left Y and right Y sticks
           */
-        double left = -1.0*gamepad1.left_stick_y;
-        double right = -1.0*gamepad1.right_stick_y;
+        double left = -gamepad1.left_stick_y;
+        double right = -gamepad1.right_stick_y;
         double lift = gamepad2.right_stick_y;
         // double liftDown = gamepad1.dpad_down;
         // double liftUp = gamepad1.dpad_up;
