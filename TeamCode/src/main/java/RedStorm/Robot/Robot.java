@@ -2,13 +2,12 @@ package RedStorm.Robot;
 
 import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
 
-import com.qualcomm.hardware.bosch.BNO055IMU;
-
-import RedStorm.Constants.RobotConstants;
+import static RedStorm.Constants.RobotConstants.ANDYMARK_NEVEREST_40_PULSES;
+import static RedStorm.Constants.RobotConstants.DRIVE_GEAR_RATIO;
+import static RedStorm.Constants.RobotConstants.DRIVE_WHEEL_CIRCUMFERENCE;
 
 public class Robot {
 
@@ -134,9 +133,10 @@ public class Robot {
     public double calculateEncoderCOUNTS(double distance) {
 
         double encoderCounts;
+        double rotations;
 
         // Calculate the number of rotations for the given drive wheel size for the supplied distance
-        double rotations = (distance / DRIVE_WHEEL_CIRCUMFERENCE) * DRIVE_GEAR_RATIO;
+        rotations = (distance / DRIVE_WHEEL_CIRCUMFERENCE) * DRIVE_GEAR_RATIO;
 
         // Calculate the number of encoder counts for the given distance
         encoderCounts = ANDYMARK_NEVEREST_40_PULSES * rotations; //calculate encoder counts for given distance
@@ -144,5 +144,24 @@ public class Robot {
         return encoderCounts;
     }
 
+    /**
+     * This method will return the average encoder count from the left and right drive motors
+     * @return averageEncoderCount - the average encoder count from the left and right drive motors
+     */
+    public double getDriveEncoderCount() {
+        double leftEncoderCount;
+        double rightEncoderCount;
+        double averageEncoderCount;
+
+        leftEncoderCount = leftDrive.getCurrentPosition();      // Get the current encoder count for the left motor
+        rightEncoderCount = rightDrive.getCurrentPosition();    // Get the current encoder count for the right motor
+
+        averageEncoderCount = (leftEncoderCount + rightEncoderCount) / 2.0;  // Calculate the average
+
+        return averageEncoderCount;
+
+
+
+    }
 
 }

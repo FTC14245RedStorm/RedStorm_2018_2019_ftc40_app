@@ -6,8 +6,8 @@ package RedStorm.Constants;
  *
  * Note: add more constants as needed
  */
-public class RobotConstants {
 
+public interface RobotConstants {
 
     /**
      * Robot drive constants
