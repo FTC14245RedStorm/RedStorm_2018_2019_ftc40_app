@@ -8,6 +8,8 @@ import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
 
 import com.qualcomm.hardware.bosch.BNO055IMU;
 
+import RedStorm.Constants.RobotConstants;
+
 public class Robot {
 
     public HardwareMap hwMap = null;
@@ -94,4 +96,53 @@ public class Robot {
         liftMotor.setPower(liftMotorMotorPower);
 
     }
+
+    /**
+     * This method will reset the encoder count of each motor to 0. It should be used before runWithEncoders
+     * and getEncoderCount when strafing.
+     */
+    public void resetEncoders() {
+
+        leftDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        rightDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+    }
+
+    /**
+     * This method will set the mode of all of the motors to run using encoder
+     */
+    public void runWithEncoders() {
+
+        leftDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        rightDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+    }
+
+    /**
+     * This method will set the mode of all of the drive train motors to run without encoder
+     */
+    public void runWithoutEncoders() {
+
+        leftDrive.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        rightDrive.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+    }
+    /**
+     * This method will return COUNTS after it is calculated from distance
+     *
+     * @param distance the desired distance in inches the robot will travel
+     * @return counts - the number of encoder counts the robot will travel that is equal
+     * to the number of inches
+     */
+    public double calculateEncoderCOUNTS(double distance) {
+
+        double encoderCounts;
+
+        // Calculate the number of rotations for the given drive wheel size for the supplied distance
+        double rotations = (distance / DRIVE_WHEEL_CIRCUMFERENCE) * DRIVE_GEAR_RATIO;
+
+        // Calculate the number of encoder counts for the given distance
+        encoderCounts = ANDYMARK_NEVEREST_40_PULSES * rotations; //calculate encoder counts for given distance
+
+        return encoderCounts;
+    }
+
+
 }
