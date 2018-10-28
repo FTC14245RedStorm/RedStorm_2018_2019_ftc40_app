@@ -6,7 +6,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 import RedStorm.Robot.Robot;
 
-@Autonomous
+@Autonomous (name="Sample RedStorm Autonomous Program", group="Samples")
 
 /**
  * Created by Steve Kocik as a sample for RedStorm to build off of...
