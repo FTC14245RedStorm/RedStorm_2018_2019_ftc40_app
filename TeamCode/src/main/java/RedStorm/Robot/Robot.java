@@ -3,6 +3,8 @@ package RedStorm.Robot;
 import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
+import com.qualcomm.robotcore.hardware.Servo;
+
 import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
 
 import static RedStorm.Constants.RobotConstants.ANDYMARK_NEVEREST_40_PULSES;
@@ -16,6 +18,8 @@ public class Robot {
     public DcMotor leftDrive = null;
     public DcMotor liftMotor = null;
     public BNO055IMU imu = null;
+    public Servo teamMarkerArm;
+    public Servo teamMarkerGrip;
 
     public BNO055IMU.Parameters parameters = new BNO055IMU.Parameters();
     public Orientation angles;
@@ -45,6 +49,9 @@ public class Robot {
         rightDrive = hwMap.get(DcMotor.class, "right_Back");
         liftMotor = hwMap.get(DcMotor.class,  "motor_Lift");
 
+        teamMarkerArm = hwMap.get(Servo.class, "marker_Arm");
+        teamMarkerGrip = hwMap.get(Servo.class, "marker_Grip");
+
         // Defines the directions the motors will spin, typically motors that
         // are mounted on the left side are mounted in such a way as that the
         // the motor will spin backwards, so we set the default direction to
@@ -68,6 +75,8 @@ public class Robot {
         parameters.angleUnit = BNO055IMU.AngleUnit.DEGREES;
         parameters.mode = BNO055IMU.SensorMode.IMU;
         imu.initialize(parameters);
+
+        initializeServosAutonomous();
     }
 
     /**
@@ -163,5 +172,63 @@ public class Robot {
 
 
     }
+    /**
+     * This method will return the average encoder count from the left and right drive motors
+     * @return averageEncoderCount - the average encoder count from the left and right drive motors
+     */
+    public double getLeftDriveEncoderCounts() {
+        double leftEncoderCount;
 
-}
+        leftEncoderCount = leftDrive.getCurrentPosition();      // Get the current encoder count for the left motor
+
+
+
+
+        return leftEncoderCount;
+    }
+    /**
+     * This method will return the average encoder count from the left and right drive motors
+     * @return averageEncoderCount - the average encoder count from the left and right drive motors
+     */
+    public double getRightDriveEncoderCounts() {
+        double rightEncoderCount;
+
+
+
+        rightEncoderCount = rightDrive.getCurrentPosition();    // Get the current encoder count for the right motor
+
+
+        return rightEncoderCount;
+    }
+    /**
+     * This method will initialize all of the servos in autonomous
+     */
+    public void initializeServosAutonomous() {
+
+        teamMarkerArm.setPosition(0.0);
+        teamMarkerGrip.setPosition(0.0);
+
+
+    }
+    /**
+     * This method will initialize all of the servos in autonomous
+     */
+    public void setTeamMarkerArm(double servoPosition) {
+
+        teamMarkerArm.setPosition(servoPosition);
+
+
+
+    }
+    /**
+     * This method will initialize all of the servos in autonomous
+     */
+    public void setTeamMarkerGrip(double servoPosition) {
+
+
+        teamMarkerGrip.setPosition(servoPosition);
+
+
+    }
+
+    }
