@@ -172,6 +172,13 @@ public class Robot {
 
 
     }
+    public double getLiftEncoderCount() {
+        double LiftEncoderCount;
+
+        LiftEncoderCount = liftMotor.getCurrentPosition() //Get the current encoder count for the lift motor
+
+        return LiftEncoderCount
+    }
     /**
      * This method will return the average encoder count from the left and right drive motors
      * @return averageEncoderCount - the average encoder count from the left and right drive motors
@@ -206,7 +213,7 @@ public class Robot {
     public void initializeServosAutonomous() {
 
         teamMarkerArm.setPosition(0.0);
-        teamMarkerGrip.setPosition(0.0);
+        teamMarkerGrip.setPosition(0.5);
 
 
     }
